@@ -44,8 +44,8 @@ await loadOptions();
 bindChrome();
 setStatus('Waiting for table…');
 
-grist.onRecords((records) => {
-  state.records = Array.isArray(records) ? records : [];
+grist.onRecords(async (records) => {
+  state.records = await resolveRecords(records);
   state.columns = inferColumns(state.records);
   render();
   schedulePublish();
@@ -256,6 +256,68 @@ function readConfigForm() {
       defaultValue: row.querySelector('[data-role="default"]').value,
     })),
   };
+}
+
+async function resolveRecords(records) {
+  const initialRows = rowsFromTablePayload(records);
+  if (initialRows.some((row) => Object.keys(row).some((key) => key !== 'id'))) {
+    return initialRows;
+  }
+
+  const selectedRows = await fetchRowsFromSelectedTable();
+  if (selectedRows.length) return selectedRows;
+
+  const tableId = new URLSearchParams(window.location.search).get('tableId') || 'Fake_DRP_Filter_Source';
+  const docRows = await fetchRowsFromDocApi(tableId);
+  return docRows.length ? docRows : initialRows;
+}
+
+async function fetchRowsFromSelectedTable() {
+  if (!window.grist?.fetchSelectedTable) return [];
+  try {
+    return rowsFromTablePayload(await window.grist.fetchSelectedTable({ format: 'rows' }));
+  } catch (error) {
+    console.warn('fetchSelectedTable failed', error);
+    return [];
+  }
+}
+
+async function fetchRowsFromDocApi(tableId) {
+  const docApi = window.grist?.docApi || window.grist?.raw?.docApi || null;
+  if (!docApi?.fetchTable || !tableId) return [];
+  try {
+    return rowsFromTablePayload(await docApi.fetchTable(tableId));
+  } catch (error) {
+    console.warn('docApi.fetchTable failed', error);
+    return [];
+  }
+}
+
+function rowsFromTablePayload(payload) {
+  if (!payload) return [];
+  if (Array.isArray(payload)) return payload.map(normalizeRecord);
+  if (Array.isArray(payload.records)) return payload.records.map(normalizeRecord);
+  if (payload.tableData && typeof payload.tableData === 'object') return rowsFromColumnarTable(payload.tableData);
+  if (typeof payload === 'object') {
+    const firstValue = Object.values(payload)[0];
+    if (Array.isArray(firstValue)) return rowsFromColumnarTable(payload);
+  }
+  return [];
+}
+
+function normalizeRecord(record) {
+  return record?.fields ? { id: record.id, ...record.fields } : (record || {});
+}
+
+function rowsFromColumnarTable(tableData) {
+  const columns = Object.keys(tableData || {});
+  if (!columns.length) return [];
+  const rowCount = Math.max(...columns.map((column) => Array.isArray(tableData[column]) ? tableData[column].length : 0));
+  return Array.from({ length: rowCount }, (_, index) => {
+    const row = {};
+    for (const column of columns) row[column] = tableData[column]?.[index];
+    return row;
+  });
 }
 
 function inferColumns(records) {
