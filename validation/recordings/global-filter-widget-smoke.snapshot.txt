@@ -1,0 +1,24 @@
+- main
+  - sectionheader
+    - paragraph
+      - StaticText "SHARED SELECT BY CONTROLLER"
+    - heading "Global filter" [level=1, ref=e2]
+    - StaticText "Waiting for table…"
+  - generic
+    - button "Configure" [ref=e3]
+    - button "Clear all" [disabled, ref=e4]
+    - StaticText "0 / 0 rows"
+  - generic
+    - heading "Active filters" [level=2, ref=e5]
+    - StaticText "No active filters"
+  - region "Configured filters" [ref=e1]
+    - StaticText "Configure fields to start filtering this table."
+  - sectionfooter
+    - paragraph
+      - StaticText "This widget publishes matching source-table row IDs with "
+      - code
+        - StaticText "grist.setSelectedRows()"
+      - StaticText ". Link other widgets with "
+      - strong
+        - StaticText "SELECT BY"
+      - StaticText " this widget. Native Grist filters stay local to each widget."

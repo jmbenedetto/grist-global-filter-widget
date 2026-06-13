@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-06-13T12:41:30Z",
+  "requested_backend": "Steel Browser",
+  "actual_backend": "agent-browser",
+  "reason": "Steel Browser CLI was not available in this environment; agent-browser video recording was the safest available fallback.",
+  "recording": "validation/recordings/global-filter-widget-smoke.webm",
+  "snapshot": "validation/recordings/global-filter-widget-smoke.snapshot.txt",
+  "url": "https://jmbenedetto.github.io/grist-global-filter-widget/",
+  "coverage": "Hosted widget smoke recording. Full Grist interactive test-case video still requires a browser session with stable authenticated Grist interaction."
+}

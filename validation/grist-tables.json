@@ -1,0 +1,5 @@
+{"tables":[{"id":"Table1","fields":{"tableRef":1,"primaryViewId":1,"summarySourc
+eTable":0,"onDemand":false,"rawViewSectionRef":2,"recordCardViewSectionRef":3}},
+{"id":"Fake_DRP_Filter_Source","fields":{"tableRef":2,"primaryViewId":2,"summary
+SourceTable":0,"onDemand":false,"rawViewSectionRef":5,"recordCardViewSectionRef"
+:6}}]}

@@ -1,0 +1,23 @@
+{
+  "created_at": "2026-06-13T12:35:50.921827+00:00",
+  "workspace_id": 208684,
+  "document_name": "Global Filter Widget Validation 20260613T123550Z",
+  "source_table": "Fake_DRP_Filter_Source",
+  "fake_record_count": 6,
+  "confirmed": true,
+  "doc_id": "6pe62Baf2XsrxwdAqyVbDD",
+  "table_ids": [
+    "Fake_DRP_Filter_Source"
+  ],
+  "record_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "note": "Creates a new fake-data validation document only; does not mutate existing documents.",
+  "verified_record_count": 6,
+  "dry_run": false
+}

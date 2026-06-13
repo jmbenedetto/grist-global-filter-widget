@@ -1,0 +1,22 @@
+{"records":[{"id":1,"fields":{"sku":"FAKE-001","category":"Contraceptive","regio
+n":"South","supplier":"Atlas Demo Supply","priority_text":"Priority 
+replenishment for stable 
+demand","active":true,"stock_cover_days":12,"next_review_date":1781481600}},{"id
+":2,"fields":{"sku":"FAKE-002","category":"Contraceptive","region":"North","supp
+lier":"Beacon Demo Supply","priority_text":"Backlog review and pending 
+approval","active":false,"stock_cover_days":45,"next_review_date":1782864000}},{
+"id":3,"fields":{"sku":"FAKE-003","category":"Health 
+Kit","region":"South","supplier":"Atlas Demo Supply","priority_text":"Routine 
+replenishment 
+candidate","active":true,"stock_cover_days":25,"next_review_date":1782086400}},{
+"id":4,"fields":{"sku":"FAKE-004","category":"Diagnostic","region":"East","suppl
+ier":"Cascade Demo Supply","priority_text":"Priority exception with low 
+coverage","active":true,"stock_cover_days":5,"next_review_date":1780617600}},{"i
+d":5,"fields":{"sku":"FAKE-005","category":"Health 
+Kit","region":"West","supplier":"Beacon Demo Supply","priority_text":"Seasonal 
+promotion stock 
+review","active":false,"stock_cover_days":70,"next_review_date":1786320000}},{"i
+d":6,"fields":{"sku":"FAKE-006","category":"Diagnostic","region":"North","suppli
+er":"Cascade Demo Supply","priority_text":"Priority launch 
+replenishment","active":true,"stock_cover_days":18,"next_review_date":1784073600
+}}]}
