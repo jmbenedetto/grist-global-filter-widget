@@ -1,0 +1,897 @@
+{
+  "created_at": "2026-06-13T17:33:40.029660+00:00",
+  "session_id": "a3e28e71-70f8-4efc-93e8-36bd854de9c4",
+  "page_url": "https://dkt.getgrist.com/6pe62Baf2Xsr/Global-Filter-Widget-Validation-20260613T123550Z/p/3",
+  "title": "Global Filter Widget Validation 20260613T123550Z - Grist",
+  "results": [
+    {
+      "id": "TC-01",
+      "action": "clear_all",
+      "state": {
+        "rowCount": "6 / 6 rows",
+        "chips": [],
+        "chipText": "No active filters",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-01-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7\nLinked Card Target\n1 OF 6\nSKU\nFAKE-001\nCategory\nContraceptive\nRegion\nSouth\nActive\nStock Cover Days\n12\nNext Review Date\n2026-06-15\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "6 / 6 rows",
+          "actual": "6 / 6 rows",
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-02",
+      "action": {
+        "category": [
+          "Diagnostic"
+        ]
+      },
+      "state": {
+        "rowCount": "2 / 6 rows",
+        "chips": [
+          "Category: Diagnostic \u00d7"
+        ],
+        "chipText": "Category: Diagnostic \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-02-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n2\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n3\nLinked Card Target\n1 OF 2\nSKU\nFAKE-004\nCategory\nDiagnostic\nRegion\nEast\nActive\nStock Cover Days\n5\nNext Review Date\n2026-06-05\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "2 / 6 rows",
+          "actual": "2 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Category: Diagnostic",
+          "expected": "Category: Diagnostic",
+          "actual": [
+            "Category: Diagnostic \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-03",
+      "action": {
+        "category": [
+          "Contraceptive",
+          "Diagnostic"
+        ]
+      },
+      "state": {
+        "rowCount": "4 / 6 rows",
+        "chips": [
+          "Category: Contraceptive OR Diagnostic \u00d7"
+        ],
+        "chipText": "Category: Contraceptive OR Diagnostic \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-03-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n4\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n5\nLinked Card Target\n1 OF 4\nSKU\nFAKE-001\nCategory\nContraceptive\nRegion\nSouth\nActive\nStock Cover Days\n12\nNext Review Date\n2026-06-15\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "4 / 6 rows",
+          "actual": "4 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Category: Contraceptive OR Diagnostic",
+          "expected": "Category: Contraceptive OR Diagnostic",
+          "actual": [
+            "Category: Contraceptive OR Diagnostic \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-04",
+      "action": {
+        "region": "South"
+      },
+      "state": {
+        "rowCount": "2 / 6 rows",
+        "chips": [
+          "Region: South \u00d7"
+        ],
+        "chipText": "Region: South \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-04-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n3\nLinked Card Target\n1 OF 2\nSKU\nFAKE-001\nCategory\nContraceptive\nRegion\nSouth\nActive\nStock Cover Days\n12\nNext Review Date\n2026-06-15\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "2 / 6 rows",
+          "actual": "2 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Region: South",
+          "expected": "Region: South",
+          "actual": [
+            "Region: South \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-05",
+      "action": {
+        "active": true
+      },
+      "state": {
+        "rowCount": "4 / 6 rows",
+        "chips": [
+          "Active: Yes \u00d7"
+        ],
+        "chipText": "Active: Yes \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-05-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n3\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n4\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n5\nLinked Card Target\n1 OF 4\nSKU\nFAKE-001\nCategory\nContraceptive\nRegion\nSouth\nActive\nStock Cover Days\n12\nNext Review Date\n2026-06-15\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "4 / 6 rows",
+          "actual": "4 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Active: Yes",
+          "expected": "Active: Yes",
+          "actual": [
+            "Active: Yes \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-06",
+      "action": {
+        "priorityText": "PRIORITY"
+      },
+      "state": {
+        "rowCount": "3 / 6 rows",
+        "chips": [
+          "Priority Text: PRIORITY \u00d7"
+        ],
+        "chipText": "Priority Text: PRIORITY \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-06-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n3\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n4\nLinked Card Target\n1 OF 3\nSKU\nFAKE-001\nCategory\nContraceptive\nRegion\nSouth\nActive\nStock Cover Days\n12\nNext Review Date\n2026-06-15\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "3 / 6 rows",
+          "actual": "3 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Priority Text: PRIORITY",
+          "expected": "Priority Text: PRIORITY",
+          "actual": [
+            "Priority Text: PRIORITY \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-07",
+      "action": {
+        "stockMin": "10",
+        "stockMax": "30"
+      },
+      "state": {
+        "rowCount": "3 / 6 rows",
+        "chips": [
+          "Stock Cover Days: 10\u202630 \u00d7"
+        ],
+        "chipText": "Stock Cover Days: 10\u202630 \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-07-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n3\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n4\nLinked Card Target\n1 OF 3\nSKU\nFAKE-001\nCategory\nContraceptive\nRegion\nSouth\nActive\nStock Cover Days\n12\nNext Review Date\n2026-06-15\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "3 / 6 rows",
+          "actual": "3 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Stock Cover Days: 10\u202630",
+          "expected": "Stock Cover Days: 10\u202630",
+          "actual": [
+            "Stock Cover Days: 10\u202630 \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-08",
+      "action": {
+        "dateMin": "2026-06-01",
+        "dateMax": "2026-06-30"
+      },
+      "state": {
+        "rowCount": "3 / 6 rows",
+        "chips": [
+          "Next Review Date: 2026-06-01\u20262026-06-30 \u00d7"
+        ],
+        "chipText": "Next Review Date: 2026-06-01\u20262026-06-30 \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-08-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n3\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n4\nLinked Card Target\n1 OF 3\nSKU\nFAKE-001\nCategory\nContraceptive\nRegion\nSouth\nActive\nStock Cover Days\n12\nNext Review Date\n2026-06-15\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "3 / 6 rows",
+          "actual": "3 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Next Review Date: 2026-06-01\u20262026-06-30",
+          "expected": "Next Review Date: 2026-06-01\u20262026-06-30",
+          "actual": [
+            "Next Review Date: 2026-06-01\u20262026-06-30 \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-09",
+      "action": "preserve",
+      "state": {
+        "rowCount": "2 / 6 rows",
+        "chips": [
+          "Category: Diagnostic \u00d7",
+          "Active: Yes \u00d7",
+          "Stock Cover Days: 1\u202620 \u00d7"
+        ],
+        "chipText": "Category: Diagnostic \u00d7\nActive: Yes \u00d7\nStock Cover Days: 1\u202620 \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-09-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n2\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n3\nLinked Card Target\n1 OF 2\nSKU\nFAKE-004\nCategory\nDiagnostic\nRegion\nEast\nActive\nStock Cover Days\n5\nNext Review Date\n2026-06-05\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "2 / 6 rows",
+          "actual": "2 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Category: Diagnostic",
+          "expected": "Category: Diagnostic",
+          "actual": [
+            "Category: Diagnostic \u00d7",
+            "Active: Yes \u00d7",
+            "Stock Cover Days: 1\u202620 \u00d7"
+          ],
+          "pass": true
+        },
+        {
+          "check": "chip contains Active: Yes",
+          "expected": "Active: Yes",
+          "actual": [
+            "Category: Diagnostic \u00d7",
+            "Active: Yes \u00d7",
+            "Stock Cover Days: 1\u202620 \u00d7"
+          ],
+          "pass": true
+        },
+        {
+          "check": "chip contains Stock Cover Days: 1\u202620",
+          "expected": "Stock Cover Days: 1\u202620",
+          "actual": [
+            "Category: Diagnostic \u00d7",
+            "Active: Yes \u00d7",
+            "Stock Cover Days: 1\u202620 \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-10",
+      "action": {
+        "clear_chip": "Stock Cover Days"
+      },
+      "state": {
+        "rowCount": "2 / 6 rows",
+        "chips": [
+          "Category: Diagnostic \u00d7",
+          "Active: Yes \u00d7"
+        ],
+        "chipText": "Category: Diagnostic \u00d7\nActive: Yes \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-10-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n2\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n3\nLinked Card Target\n1 OF 2\nSKU\nFAKE-004\nCategory\nDiagnostic\nRegion\nEast\nActive\nStock Cover Days\n5\nNext Review Date\n2026-06-05\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "2 / 6 rows",
+          "actual": "2 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Category: Diagnostic",
+          "expected": "Category: Diagnostic",
+          "actual": [
+            "Category: Diagnostic \u00d7",
+            "Active: Yes \u00d7"
+          ],
+          "pass": true
+        },
+        {
+          "check": "chip contains Active: Yes",
+          "expected": "Active: Yes",
+          "actual": [
+            "Category: Diagnostic \u00d7",
+            "Active: Yes \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-11",
+      "action": "clear_all",
+      "state": {
+        "rowCount": "6 / 6 rows",
+        "chips": [],
+        "chipText": "No active filters",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-11-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7\nLinked Card Target\n1 OF 6\nSKU\nFAKE-001\nCategory\nContraceptive\nRegion\nSouth\nActive\nStock Cover Days\n12\nNext Review Date\n2026-06-15\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "6 / 6 rows",
+          "actual": "6 / 6 rows",
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-12",
+      "action": {
+        "region": "South"
+      },
+      "state": {
+        "rowCount": "2 / 6 rows",
+        "chips": [
+          "Region: South \u00d7"
+        ],
+        "chipText": "Region: South \u00d7",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-12-retry.png",
+      "textSnippet": "DKT\nAdd new\nT\nTable1\nF\nFake_DRP_Filter_Source\nG\nGlobal Filter Widget Validation\nTOOLS\nAssistant\nAccess Rules\nRaw data\nDocument history\nCode view\nAutomations\nNEW\nSettings\nHelp Center\nAccessibility\nAccessibility\nF4\nDRP / \n / \nMT\nGlobal Filter Controller\nLinked Table Target\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n3\nLinked Card Target\n1 OF 2\nSKU\nFAKE-001\nCategory\nContraceptive\nRegion\nSouth\nActive\nStock Cover Days\n12\nNext Review Date\n2026-06-15\nUnlinked Table Control\nSKU\nCategory\nRegion\nActive\nStock Cover Days\nNext Review Date\n+\n1\nFAKE-001\nContraceptive\nSouth\n12\n2026-06-15\n2\nFAKE-002\nContraceptive\nNorth\n45\n2026-07-01\n3\nFAKE-003\nHealth Kit\nSouth\n25\n2026-06-22\n4\nFAKE-004\nDiagnostic\nEast\n5\n2026-06-05\n5\nFAKE-005\nHealth Kit\nWest\n70\n2026-08-10\n6\nFAKE-006\nDiagnostic\nNorth\n18\n2026-07-15\n7",
+      "checks": [
+        {
+          "check": "rowCount",
+          "expected": "2 / 6 rows",
+          "actual": "2 / 6 rows",
+          "pass": true
+        },
+        {
+          "check": "chip contains Region: South",
+          "expected": "Region: South",
+          "actual": [
+            "Region: South \u00d7"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "TC-13",
+      "action": "configuration exposure check",
+      "state": {
+        "rowCount": "6 / 6 rows",
+        "chips": [],
+        "chipText": "No active filters",
+        "status": "Ready (active, category, next_review_date, priority_text, region, stock_cover_days)",
+        "filterFields": [
+          {
+            "field": "category",
+            "title": "Category",
+            "control": "select"
+          },
+          {
+            "field": "region",
+            "title": "Region",
+            "control": "select"
+          },
+          {
+            "field": "active",
+            "title": "Active",
+            "control": "select"
+          },
+          {
+            "field": "priority_text",
+            "title": "Priority Text",
+            "control": "search"
+          },
+          {
+            "field": "stock_cover_days",
+            "title": "Stock Cover Days",
+            "control": "number"
+          },
+          {
+            "field": "next_review_date",
+            "title": "Next Review Date",
+            "control": "date"
+          }
+        ]
+      },
+      "screenshot": "validation/screenshots/steel-tc-13-retry.png",
+      "checks": [
+        {
+          "check": "sku not exposed",
+          "expected": "sku absent",
+          "actual": [
+            "category",
+            "region",
+            "active",
+            "priority_text",
+            "stock_cover_days",
+            "next_review_date"
+          ],
+          "pass": true
+        },
+        {
+          "check": "supplier not exposed",
+          "expected": "supplier absent",
+          "actual": [
+            "category",
+            "region",
+            "active",
+            "priority_text",
+            "stock_cover_days",
+            "next_review_date"
+          ],
+          "pass": true
+        },
+        {
+          "check": "configured fields exposed",
+          "expected": [
+            "category",
+            "region",
+            "active",
+            "priority_text",
+            "stock_cover_days",
+            "next_review_date"
+          ],
+          "actual": [
+            "category",
+            "region",
+            "active",
+            "priority_text",
+            "stock_cover_days",
+            "next_review_date"
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "overall_pass": true
+}

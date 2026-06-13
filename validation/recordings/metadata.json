@@ -1,10 +1,21 @@
 {
-  "created_at": "2026-06-13T12:41:30Z",
+  "created_at": "2026-06-13T17:34:04Z",
   "requested_backend": "Steel Browser",
-  "actual_backend": "agent-browser",
-  "reason": "Steel Browser CLI was not available in this environment; agent-browser video recording was the safest available fallback.",
-  "recording": "validation/recordings/global-filter-widget-smoke.webm",
-  "snapshot": "validation/recordings/global-filter-widget-smoke.snapshot.txt",
-  "url": "https://jmbenedetto.github.io/grist-global-filter-widget/",
-  "coverage": "Hosted widget smoke recording. Full Grist interactive test-case video still requires a browser session with stable authenticated Grist interaction."
+  "actual_backend": "Steel Browser cloud session via Steel CLI 0.4.4 + Playwright over Steel CDP",
+  "session_id": "a3e28e71-70f8-4efc-93e8-36bd854de9c4",
+  "recording_source": "Steel automatic session recording HLS endpoint /v1/sessions/{session_id}/hls",
+  "recording": "validation/recordings/steel-global-filter-validation-final.mp4",
+  "hls_playlist": "validation/recordings/steel-final-validation.m3u8",
+  "ffprobe": "validation/recordings/steel-global-filter-validation-final.ffprobe.json",
+  "duration_seconds": 147.5,
+  "size_bytes": 17748118,
+  "validation_results": "validation/steel-validation-results.json",
+  "screenshots": "validation/screenshots/steel-tc-01-retry.png through validation/screenshots/steel-tc-13-retry.png",
+  "url": "https://dkt.getgrist.com/doc/6pe62Baf2XsrxwdAqyVbDD/p/3",
+  "coverage": "TC-01 through TC-13 executed in order against the dummy fake-data Grist document. Screenshots show widget row counts/chips plus linked target widgets and unlinked control. JSON evidence reports overall_pass=true.",
+  "notes": [
+    "Steel CLI 0.4.4 does not expose a steel browser record command.",
+    "The recording was exported from Steel automatic HLS recording and converted to MP4 with ffmpeg.",
+    "No existing Grist document was touched; only the dummy validation document was used."
+  ]
 }

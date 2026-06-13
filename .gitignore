@@ -1,2 +1,12 @@
 node_modules/
 .DS_Store
+validation/tmp/
+validation/.backup/
+validation/recordings/.backup/
+validation/recordings/steel-session-*-auto-recording.mp4
+validation/screenshots/retry-*.png
+validation/screenshots/steel-after-*.png
+validation/screenshots/steel-category-*.png
+validation/screenshots/steel-column-*.png
+validation/screenshots/steel-selector-*.png
+validation/screenshots/steel-tab-*.png

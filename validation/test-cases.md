@@ -32,10 +32,10 @@ Unconfigured fields expected not visible:
 | TC-04 | Region single-select = `South`. | 2 | Active chip says `Region: South`; linked targets show FAKE-001 and FAKE-003. |
 | TC-05 | Active boolean = `Yes`. | 4 | Active chip says `Active: Yes`; row count is `4 / 6 rows`. |
 | TC-06 | Priority Text contains `priority` using uppercase/lowercase variant. | 3 | Case-insensitive text matching shows FAKE-001, FAKE-004, and FAKE-006. |
-| TC-07 | Stock Cover Days range `10..30`. | 4 | Number range includes FAKE-001, FAKE-003, FAKE-006, and excludes 5/45/70. |
+| TC-07 | Stock Cover Days range `10..30`. | 3 | Number range includes FAKE-001, FAKE-003, FAKE-006, and excludes 5/45/70. |
 | TC-08 | Next Review Date range `2026-06-01..2026-06-30`. | 3 | Date range includes June rows FAKE-001, FAKE-003, FAKE-004. |
 | TC-09 | Category = `Diagnostic` AND Active = `Yes` AND Stock Cover Days `1..20`. | 2 | Multiple active chips shown; AND semantics keep FAKE-004 and FAKE-006. |
-| TC-10 | Clear one active field from TC-09. | Count increases consistently | Individual chip clear recomputes selection and count. |
+| TC-10 | Clear one active field from TC-09. | Count recomputes consistently | Individual chip clear recomputes selection. In the fake dataset, clearing `Stock Cover Days` from TC-09 leaves `Category=Diagnostic AND Active=Yes`, which still matches FAKE-004 and FAKE-006 (`2 / 6 rows`). |
 | TC-11 | Clear all. | 6 or 0 according to configured empty behavior | Clear-all restores configured empty-filter behavior. |
 | TC-12 | Compare linked target widgets and unlinked control widget. | Linked targets change, unlinked control remains unchanged | Screenshot shows selective application. |
 | TC-13 | Configuration exposure check. | Only configured fields visible | Screenshot shows `sku` and `supplier` are not exposed as filter controls. |
@@ -49,3 +49,4 @@ Unconfigured fields expected not visible:
 
 - One Steel Browser recording walking through TC-01 through TC-13 in order.
 - Save recording and metadata under `validation/recordings/`.
+- Steel CLI `0.4.4` has no `steel browser record` command; use Steel automatic HLS recording export and convert to MP4 with `ffmpeg`.
