@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { filterRecords, normalizeOptions, uniqueFieldValues } from './filter-core.js';
+import { deriveFilterDefinitions, filterRecords, normalizeOptions, uniqueFieldValues } from './filter-core.js';
 
 const records = [
   { id: 1, category: 'A', status: 'New', active: true, notes: 'Priority supplier', qty: 10, due: '2026-06-01' },
@@ -71,4 +71,15 @@ test('field lookup accepts Grist label-style names for configured id-style field
   });
   assert.deepEqual(uniqueFieldValues(labelRows, 'category'), ['Diagnostic', 'Health Kit']);
   assert.deepEqual(filterRecords(labelRows, options, { category: 'Diagnostic', stock_cover_days: { min: '1', max: '10' } }).map((row) => row.id), [1]);
+});
+
+test('deriveFilterDefinitions uses shown Grist fields and infers compact filter editors', () => {
+  const definitions = deriveFilterDefinitions(records, ['category', 'active', 'qty', 'due', 'notes']);
+  assert.deepEqual(definitions.map((filter) => [filter.field, filter.type]), [
+    ['category', 'multiSelect'],
+    ['active', 'boolean'],
+    ['qty', 'numberRange'],
+    ['due', 'dateRange'],
+    ['notes', 'text'],
+  ]);
 });

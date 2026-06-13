@@ -3,82 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grist Global Filter Widget</title>
-  <link rel="stylesheet" href="styles.css?v=20260613-compact">
+  <title>Filter Widget</title>
+  <link rel="stylesheet" href="styles.css?v=20260613-option-b">
   <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
 </head>
 <body>
   <main class="app-shell compact-shell">
-    <section class="filter-bar" aria-label="Global filter bar">
-      <div class="filter-meta">
-        <strong class="bar-title">Global filter</strong>
-        <span class="row-count" id="row-count">0 / 0</span>
-        <span class="status-pill" id="status-pill" title="Widget status">Loading…</span>
-      </div>
-
-      <section id="filter-list" class="filter-strip" aria-label="Configured filters">
-        <div class="empty-state">Configure fields to start filtering.</div>
-      </section>
-
-      <div class="bar-actions">
-        <div id="active-chips" class="chip-list compact empty" aria-live="polite">No active filters</div>
-        <button id="clear-all" type="button" class="ghost small" disabled>Clear</button>
-        <button id="open-config" type="button" class="small" title="Configure filters">⚙</button>
-      </div>
+    <section id="filter-bar" class="filter-bar" aria-label="Filter bar">
+      <div id="active-chips" class="chip-list compact" aria-live="polite"></div>
+      <button id="add-filter-placeholder" class="add-filter-placeholder" type="button">Click to add filter</button>
     </section>
 
-    <section class="config-panel" id="config-panel" hidden>
-      <div class="panel-heading">
-        <div>
-          <h2>Configure filters</h2>
-          <p>Select only the fields that should be exposed to users. The runtime widget stays as a compact horizontal bar.</p>
-        </div>
-        <button class="ghost" id="close-config" type="button">Close</button>
-      </div>
-      <div class="config-actions">
-        <label>
-          Empty filter behavior
-          <select id="empty-behavior">
-            <option value="all">Publish all rows</option>
-            <option value="none">Publish no rows</option>
-          </select>
-        </label>
-        <button id="add-filter" type="button">Add field</button>
-        <button id="save-config" type="button">Save configuration</button>
-      </div>
-      <div id="config-fields" class="config-fields"></div>
-    </section>
+    <div id="field-menu" class="popover field-menu" hidden></div>
+    <div id="filter-editor" class="popover filter-editor" hidden></div>
   </main>
 
-  <template id="config-row-template">
-    <div class="config-row">
-      <label>
-        Field
-        <select data-role="field"></select>
-      </label>
-      <label>
-        Label
-        <input data-role="label" type="text" placeholder="Human label">
-      </label>
-      <label>
-        Type
-        <select data-role="type">
-          <option value="text">Text contains</option>
-          <option value="singleSelect">Single select</option>
-          <option value="multiSelect">Multi select</option>
-          <option value="boolean">Boolean</option>
-          <option value="numberRange">Number range</option>
-          <option value="dateRange">Date range</option>
-        </select>
-      </label>
-      <label>
-        Default
-        <input data-role="default" type="text" placeholder="Optional">
-      </label>
-      <button data-role="remove" type="button" class="danger">Remove</button>
-    </div>
-  </template>
-
-  <script type="module" src="app.js?v=20260613-compact"></script>
+  <script type="module" src="app.js?v=20260613-option-b"></script>
 </body>
 </html>

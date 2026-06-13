@@ -57,6 +57,23 @@ export function buildInitialState(options) {
   return Object.fromEntries(options.filters.map((filter) => [filter.field, structuredCloneSafe(filter.defaultValue)]));
 }
 
+export function deriveFilterDefinitions(records, fields) {
+  return fields
+    .filter((field) => field && field !== 'id')
+    .map((field) => ({
+      field,
+      label: labelFromField(field),
+      type: inferFilterType(records, field),
+      defaultValue: null,
+    }));
+}
+
+export function emptyValueForType(type) {
+  if (type === 'multiSelect') return [];
+  if (type === 'numberRange' || type === 'dateRange') return { min: '', max: '' };
+  return null;
+}
+
 export function structuredCloneSafe(value) {
   if (value == null) return value;
   return JSON.parse(JSON.stringify(value));
@@ -127,6 +144,30 @@ function normalizeFieldName(field) {
   return String(field || '').toLocaleLowerCase().replace(/[^a-z0-9]+/g, '');
 }
 
+function labelFromField(field) {
+  return String(field || '')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/\b\w/g, (char) => char.toLocaleUpperCase());
+}
+
+function inferFilterType(records, field) {
+  const values = records
+    .map((record) => getRecordValue(record, field))
+    .filter((value) => value !== undefined && value !== null && value !== '');
+  if (!values.length) return 'text';
+  if (values.every((value) => typeof value === 'boolean' || ['true', 'false', 'yes', 'no', '0', '1'].includes(String(value).trim().toLowerCase()))) return 'boolean';
+  if (values.every((value) => Number.isFinite(Number(value)))) return 'numberRange';
+  if (values.every((value) => !Number.isNaN(Date.parse(value)))) return 'dateRange';
+
+  const normalizedField = normalizeFieldName(field);
+  if (/note|text|description|comment|observa|descri/.test(normalizedField)) return 'text';
+
+  const uniqueCount = uniqueFieldValues(records, field).length;
+  return uniqueCount <= 20 ? 'multiSelect' : 'text';
+}
+
 export function summarizeValue(value, type) {
   if (!hasActiveValue(value, type)) return '';
   if (type === 'multiSelect') return value.join(' OR ');
@@ -137,6 +178,19 @@ export function summarizeValue(value, type) {
   }
   if (type === 'boolean') return value ? 'Yes' : 'No';
   return String(value);
+}
+
+export function summarizeCompactValue(value, type) {
+  if (!hasActiveValue(value, type)) return '';
+  if (type === 'multiSelect') return value.length === 1 ? value[0] : `${value.length}`;
+  if (type === 'numberRange' || type === 'dateRange') {
+    const min = value.min || '−∞';
+    const max = value.max || '+∞';
+    return `${min}–${max}`;
+  }
+  if (type === 'boolean') return value ? 'Yes' : 'No';
+  const text = String(value);
+  return text.length > 18 ? `${text.slice(0, 17)}…` : text;
 }
 
 function normalizeComparable(value) {

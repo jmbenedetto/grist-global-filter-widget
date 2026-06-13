@@ -5,18 +5,22 @@ import test from 'node:test';
 const indexHtml = readFileSync(new URL('./index.html', import.meta.url), 'utf8');
 const stylesCss = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
 
-test('widget shell uses a compact horizontal filter bar instead of stacked panels', () => {
-  assert.match(indexHtml, /class="filter-bar"/);
-  assert.doesNotMatch(indexHtml, /class="app-header"/);
-  assert.doesNotMatch(indexHtml, /class="help-text"/);
-  assert.match(stylesCss, /\.filter-bar\s*\{/);
-  assert.match(stylesCss, /grid-template-columns:\s*auto\s+minmax\(0,\s*1fr\)\s+auto/);
+test('option B shell is only an empty add-filter bar plus compact tags', () => {
+  assert.match(indexHtml, /id="filter-bar"[^>]*class="filter-bar/);
+  assert.match(indexHtml, /id="add-filter-placeholder"/);
+  assert.match(indexHtml, /id="field-menu"/);
+  assert.match(indexHtml, /id="filter-editor"/);
+  assert.doesNotMatch(indexHtml, /Global filter/);
+  assert.doesNotMatch(indexHtml, /id="row-count"/);
+  assert.doesNotMatch(indexHtml, /id="open-config"/);
+  assert.doesNotMatch(indexHtml, /id="config-panel"/);
 });
 
-test('active chips and filter controls live in the same row for small footprint', () => {
-  assert.match(indexHtml, /id="filter-list"[^>]*class="filter-strip"/);
+test('option B uses tight pills and can grow downward when many tags exist', () => {
   assert.match(indexHtml, /id="active-chips"[^>]*class="chip-list compact/);
-  assert.match(stylesCss, /\.filter-strip\s*\{/);
-  assert.match(stylesCss, /overflow-x:\s*auto/);
-  assert.match(stylesCss, /max-height:\s*64px/);
+  assert.match(stylesCss, /\.filter-bar\s*\{/);
+  assert.match(stylesCss, /align-content:\s*start/);
+  assert.match(stylesCss, /flex-wrap:\s*wrap/);
+  assert.match(stylesCss, /font-size:\s*0\.72rem/);
+  assert.match(stylesCss, /padding:\s*0\.16rem 0\.38rem/);
 });
