@@ -21,12 +21,18 @@ const state = {
 };
 
 const el = {
+  shell: document.querySelector('.app-shell'),
   bar: document.querySelector('#filter-bar'),
   activeChips: document.querySelector('#active-chips'),
   addPlaceholder: document.querySelector('#add-filter-placeholder'),
   fieldMenu: document.querySelector('#field-menu'),
   editor: document.querySelector('#filter-editor'),
 };
+
+const LAYOUT_BREAKPOINTS = Object.freeze({
+  medium: 300,
+  wide: 520,
+});
 
 window.addEventListener('error', (event) => console.error(event.message));
 document.addEventListener('keydown', (event) => {
@@ -45,6 +51,7 @@ grist.ready({
 });
 
 bindChrome();
+bindResponsiveLayout();
 render();
 
 grist.onRecords(async (records) => {
@@ -73,6 +80,31 @@ function bindChrome() {
     event.stopPropagation();
     openFieldMenu();
   });
+}
+
+function bindResponsiveLayout() {
+  if (!el.shell) return;
+  let frame = null;
+  const applyLayout = () => {
+    frame = null;
+    const width = el.shell.getBoundingClientRect().width || window.innerWidth || 0;
+    const layout = width >= LAYOUT_BREAKPOINTS.wide
+      ? 'wide'
+      : width >= LAYOUT_BREAKPOINTS.medium
+        ? 'medium'
+        : 'narrow';
+    el.shell.dataset.layout = layout;
+  };
+  const scheduleLayout = () => {
+    if (frame !== null) return;
+    frame = window.requestAnimationFrame(applyLayout);
+  };
+
+  applyLayout();
+  window.addEventListener('resize', scheduleLayout);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(scheduleLayout).observe(el.shell);
+  }
 }
 
 function render() {

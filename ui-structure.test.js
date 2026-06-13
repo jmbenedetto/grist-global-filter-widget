@@ -42,7 +42,21 @@ test('value editor keeps checkbox size independent from text visibility', () => 
   assert.doesNotMatch(stylesCss, /\.editor-fields input\s*\{/);
 });
 
+test('widget follows Grist theme variables instead of hard-coded light mode', () => {
+  assert.match(stylesCss, /color-scheme:\s*light dark/);
+  assert.match(stylesCss, /--grist-theme-widget-bg/);
+  assert.match(stylesCss, /--grist-theme-text/);
+  assert.match(stylesCss, /--grist-theme-input-bg/);
+  assert.match(stylesCss, /--grist-theme-control-primary-bg/);
+  assert.doesNotMatch(stylesCss, /color-scheme:\s*light;/);
+});
+
 test('widget layout reacts to available width', () => {
   assert.match(stylesCss, /container-type:\s*inline-size/);
-  assert.match(stylesCss, /@container\s*\(min-width:\s*360px\)/);
+  assert.match(stylesCss, /@container\s*\(min-width:\s*300px\)/);
+  assert.match(stylesCss, /@container\s*\(min-width:\s*520px\)/);
+  assert.match(appJs, /ResizeObserver/);
+  assert.match(appJs, /dataset\.layout\s*=\s*layout/);
+  assert.match(stylesCss, /data-layout="medium"/);
+  assert.match(stylesCss, /data-layout="wide"/);
 });
