@@ -12,7 +12,7 @@ import {
 
 const state = {
   records: [],
-  columns: [],
+  fields: [],
   options: DEFAULT_OPTIONS,
   filters: {},
   openFieldMenu: false,
@@ -42,14 +42,6 @@ document.addEventListener('click', (event) => {
 grist.ready({
   requiredAccess: 'read table',
   allowSelectBy: true,
-  columns: [
-    { name: 'category', title: 'Category', type: 'Text', optional: true },
-    { name: 'region', title: 'Region', type: 'Text', optional: true },
-    { name: 'active', title: 'Active', type: 'Bool', optional: true },
-    { name: 'priority_text', title: 'Priority Text', type: 'Text', optional: true },
-    { name: 'stock_cover_days', title: 'Stock Cover Days', type: 'Numeric', optional: true },
-    { name: 'next_review_date', title: 'Next Review Date', type: 'Date', optional: true },
-  ],
 });
 
 bindChrome();
@@ -57,12 +49,12 @@ render();
 
 grist.onRecords(async (records) => {
   state.records = await resolveRecords(records);
-  state.columns = inferColumns(state.records);
+  state.fields = inferColumns(state.records);
   const previousFilters = state.filters;
   state.options = normalizeOptions({
     version: 1,
     emptyBehavior: 'all',
-    filters: deriveFilterDefinitions(state.records, state.columns),
+    filters: deriveFilterDefinitions(state.records, state.fields),
   });
   state.filters = Object.fromEntries(state.options.filters.map((filter) => [
     filter.field,
@@ -262,6 +254,7 @@ function buildRangeEditor(filter) {
 function buildTextEditor(filter) {
   const input = document.createElement('input');
   input.type = 'search';
+  input.className = 'text-editor-input';
   input.placeholder = 'Contains text';
   input.value = state.filters[filter.field] || '';
   input.addEventListener('input', () => {
@@ -323,12 +316,9 @@ async function publishSelection() {
 
 async function resolveRecords(records) {
   const initialRows = rowsFromTablePayload(records);
-  if (initialRows.some((row) => Object.keys(row).some((key) => key !== 'id'))) {
-    return initialRows;
-  }
-
   const selectedRows = await fetchRowsFromSelectedTable();
   if (selectedRows.length) return selectedRows;
+  if (initialRows.some((row) => Object.keys(row).some((key) => key !== 'id'))) return initialRows;
 
   const tableId = new URLSearchParams(window.location.search).get('tableId') || 'Fake_DRP_Filter_Source';
   const docRows = await fetchRowsFromDocApi(tableId);

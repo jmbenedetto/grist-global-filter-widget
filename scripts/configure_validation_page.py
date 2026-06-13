@@ -188,7 +188,6 @@ def main() -> int:
         field_records = [
             {"fields": {"parentId": section_id, "colRef": refs[field], "parentPos": pos}}
             for pos, field in enumerate(SHOWN_FIELDS, start=1)
-            if spec["parentKey"] != "custom"
         ]
         if field_records:
             api_request("POST", args.doc_id, "/tables/_grist_Views_section_field/records", api_key, {"records": field_records})

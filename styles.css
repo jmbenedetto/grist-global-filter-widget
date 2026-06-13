@@ -40,6 +40,7 @@ button:disabled {
 
 .app-shell {
   position: relative;
+  container-type: inline-size;
   padding: 0.22rem;
 }
 
@@ -187,7 +188,8 @@ button:disabled {
   padding: 0.25rem;
 }
 
-.editor-fields input {
+.text-editor-input,
+.range-fields input {
   width: 100%;
   min-height: 1.8rem;
   border: 1px solid var(--line);
@@ -237,4 +239,35 @@ button:disabled {
   color: var(--muted);
   padding: 0.55rem;
   font-size: 0.74rem;
+}
+
+@container (min-width: 360px) {
+  .filter-bar.vertical {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .chip-list.vertical {
+    display: contents;
+  }
+
+  .filter-chip {
+    width: auto;
+    max-width: 14rem;
+  }
+
+  .add-filter-placeholder {
+    flex: 1 1 10rem;
+    width: auto;
+    min-width: 8rem;
+  }
+
+  .popover {
+    position: absolute;
+    top: calc(100% + 0.22rem);
+    left: 0.35rem;
+    width: auto;
+    min-width: 14rem;
+    max-width: min(30rem, calc(100vw - 1rem));
+  }
 }

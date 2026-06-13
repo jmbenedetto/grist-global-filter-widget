@@ -4,6 +4,7 @@ import test from 'node:test';
 
 const indexHtml = readFileSync(new URL('./index.html', import.meta.url), 'utf8');
 const stylesCss = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
+const appJs = readFileSync(new URL('./app.js', import.meta.url), 'utf8');
 
 test('vertical option B shell has no title counter gear or config panel', () => {
   assert.match(indexHtml, /id="filter-bar"[^>]*class="filter-bar vertical/);
@@ -28,4 +29,20 @@ test('vertical option B stacks tight tags and expands downward inside narrow wid
   assert.match(stylesCss, /padding:\s*0\.16rem 0\.38rem/);
   assert.match(stylesCss, /\.popover\s*\{/);
   assert.match(stylesCss, /position:\s*static/);
+});
+
+test('widget uses standard Grist visible-column configuration instead of custom mapping dropdowns', () => {
+  assert.match(appJs, /grist\.ready\(\{\s*requiredAccess:\s*'read table',\s*allowSelectBy:\s*true,\s*\}\)/s);
+  assert.doesNotMatch(appJs, /columns:\s*\[/);
+  assert.match(appJs, /includeColumns:\s*'shown'/);
+});
+
+test('value editor keeps checkbox size independent from text visibility', () => {
+  assert.match(stylesCss, /\.value-item input\s*\{[^}]*width:\s*0\.9rem/s);
+  assert.doesNotMatch(stylesCss, /\.editor-fields input\s*\{/);
+});
+
+test('widget layout reacts to available width', () => {
+  assert.match(stylesCss, /container-type:\s*inline-size/);
+  assert.match(stylesCss, /@container\s*\(min-width:\s*360px\)/);
 });

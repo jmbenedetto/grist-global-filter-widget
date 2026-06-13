@@ -2,7 +2,7 @@
 
 Static Grist custom widget that acts as a shared filter controller for one selected source table. It reads the selected table, evaluates configured faceted filters, and publishes matching row IDs with `grist.setSelectedRows(...)` so other Grist widgets can follow it through `SELECT BY`.
 
-The runtime UI is intentionally compact: an Option B-style vertical filter strip designed for a narrow Grist widget footprint so the rest of the page remains available for analysis widgets. It has no title, row counter, or in-widget configuration panel; available filter attributes come from fields shown/mapped in Grist's standard widget sidebar.
+The runtime UI is intentionally compact: an Option B-style vertical filter strip designed for a narrow Grist widget footprint so the rest of the page remains available for analysis widgets. It has no title, row counter, or in-widget configuration panel; available filter attributes come from fields marked as visible in Grist's standard widget sidebar.
 
 ## Hosted URL
 
@@ -25,14 +25,14 @@ After GitHub Pages is enabled for the repository root on the default branch, the
 2. Set the Custom URL to the hosted widget URL.
 3. Set access to `Read table`.
 4. Select the source table that should drive shared filtering.
-5. Use Grist's standard widget sidebar field mapping/shown-fields controls to select the source-table fields that should be available as filters.
+5. Use Grist's standard widget sidebar visible-column checkboxes to mark the source-table fields that should be available as filters.
 6. Configure target Grist widgets with `SELECT BY` the global filter widget.
 
 ## Layout behavior
 
 - Runtime controls render as one narrow vertical strip with tight filter tags and an empty click zone.
 - There is no visible title, row counter, gear button, or dedicated in-widget configuration page.
-- Clicking the empty bar opens the list of available fields from Grist's standard sidebar configuration.
+- Clicking the empty strip opens the list of available fields from Grist's standard visible-column sidebar configuration.
 - Clicking a field opens its value editor; the tag is created only after a value is selected or entered.
 - Clicking an existing tag reopens the editor and allows changing values or removing that filter attribute.
 - When there are many tags, the filter box extends downward instead of truncating controls.
@@ -53,7 +53,7 @@ This custom widget is a shared filter controller: linked widgets respond to the 
 
 ## Field configuration
 
-Only fields shown/mapped in Grist's standard widget sidebar are exposed in the user-facing filter controls. Fields removed from the sidebar configuration are not displayed. The widget infers compact editors from the shown field values: categorical checklists for low-cardinality text fields, boolean choices, text contains inputs, numeric ranges, and date ranges.
+Only fields marked visible in Grist's standard widget sidebar are exposed in the user-facing filter controls. Fields removed from the visible-column configuration are not displayed. The widget infers compact editors from the shown field values: categorical checklists for low-cardinality text fields, boolean choices, text contains inputs, numeric ranges, and date ranges.
 
 ## Validation plan
 

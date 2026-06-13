@@ -1,0 +1,57 @@
+{
+  "created_at": "2026-06-13T23:29:56.746107+00:00",
+  "doc_id": "6pe62Baf2XsrxwdAqyVbDD",
+  "section_id": 7,
+  "source_table": "Fake_DRP_Filter_Source",
+  "section_parent_key": "custom",
+  "requested_visible_fields": [
+    "sku",
+    "category",
+    "region",
+    "active",
+    "stock_cover_days",
+    "next_review_date"
+  ],
+  "before_visible_fields": [],
+  "added_fields": [
+    {
+      "parentId": 7,
+      "colRef": 6,
+      "parentPos": 1
+    },
+    {
+      "parentId": 7,
+      "colRef": 7,
+      "parentPos": 2
+    },
+    {
+      "parentId": 7,
+      "colRef": 8,
+      "parentPos": 3
+    },
+    {
+      "parentId": 7,
+      "colRef": 11,
+      "parentPos": 4
+    },
+    {
+      "parentId": 7,
+      "colRef": 12,
+      "parentPos": 5
+    },
+    {
+      "parentId": 7,
+      "colRef": 13,
+      "parentPos": 6
+    }
+  ],
+  "after_visible_fields": [
+    "sku",
+    "category",
+    "region",
+    "active",
+    "stock_cover_days",
+    "next_review_date"
+  ],
+  "policy": "Mutates only the fake-data validation document created for this OpenSpec change."
+}
