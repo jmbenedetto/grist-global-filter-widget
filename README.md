@@ -2,7 +2,7 @@
 
 Static Grist custom widget that acts as a shared filter controller for one selected source table. It reads the selected table, evaluates configured faceted filters, and publishes matching row IDs with `grist.setSelectedRows(...)` so other Grist widgets can follow it through `SELECT BY`.
 
-The runtime UI is intentionally compact: an Option B-style horizontal filter bar designed to occupy a small Grist widget footprint so the rest of the page remains available for analysis widgets. It has no title, row counter, or in-widget configuration panel; available filter attributes come from fields shown/mapped in Grist's standard widget sidebar.
+The runtime UI is intentionally compact: an Option B-style vertical filter strip designed for a narrow Grist widget footprint so the rest of the page remains available for analysis widgets. It has no title, row counter, or in-widget configuration panel; available filter attributes come from fields shown/mapped in Grist's standard widget sidebar.
 
 ## Hosted URL
 
@@ -30,12 +30,12 @@ After GitHub Pages is enabled for the repository root on the default branch, the
 
 ## Layout behavior
 
-- Runtime controls render as one horizontal bar with tight filter tags and an empty click zone.
+- Runtime controls render as one narrow vertical strip with tight filter tags and an empty click zone.
 - There is no visible title, row counter, gear button, or dedicated in-widget configuration page.
 - Clicking the empty bar opens the list of available fields from Grist's standard sidebar configuration.
 - Clicking a field opens its value editor; the tag is created only after a value is selected or entered.
 - Clicking an existing tag reopens the editor and allows changing values or removing that filter attribute.
-- When there are many tags, the bar wraps downward instead of truncating controls.
+- When there are many tags, the filter box extends downward instead of truncating controls.
 - Help/documentation text is kept in this README instead of occupying dashboard screen real estate.
 
 ## Filtering behavior
