@@ -1,0 +1,22 @@
+{
+  "name": "grist-global-filter-widget",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Static Grist custom widget that publishes a shared SELECT BY row selection from configured faceted filters.",
+  "scripts": {
+    "test": "node --test",
+    "serve": "npx --yes http-server . -p 4173"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jmbenedetto/grist-global-filter-widget.git"
+  },
+  "keywords": [
+    "grist",
+    "custom-widget",
+    "filter",
+    "select-by"
+  ],
+  "license": "MIT"
+}

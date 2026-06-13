@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+validation/screenshots/*.png
+validation/screenshots/*.jpg
+validation/recordings/*.mp4
+validation/recordings/*.webm

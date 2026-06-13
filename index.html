@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grist Global Filter Widget</title>
+  <link rel="stylesheet" href="styles.css?v=20260613">
+  <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Shared SELECT BY controller</p>
+        <h1>Global filter</h1>
+      </div>
+      <div class="status-pill" id="status-pill">Loading…</div>
+    </header>
+
+    <section class="config-panel" id="config-panel" hidden>
+      <div class="panel-heading">
+        <div>
+          <h2>Configure filters</h2>
+          <p>Select only the fields that should be exposed to users.</p>
+        </div>
+        <button class="ghost" id="close-config" type="button">Close</button>
+      </div>
+      <div class="config-actions">
+        <label>
+          Empty filter behavior
+          <select id="empty-behavior">
+            <option value="all">Publish all rows</option>
+            <option value="none">Publish no rows</option>
+          </select>
+        </label>
+        <button id="add-filter" type="button">Add field</button>
+        <button id="save-config" type="button">Save configuration</button>
+      </div>
+      <div id="config-fields" class="config-fields"></div>
+    </section>
+
+    <section class="toolbar">
+      <button id="open-config" type="button">Configure</button>
+      <button id="clear-all" type="button" class="ghost" disabled>Clear all</button>
+      <div class="row-count" id="row-count">0 / 0 rows</div>
+    </section>
+
+    <section class="active-filters" aria-live="polite">
+      <h2>Active filters</h2>
+      <div id="active-chips" class="chip-list empty">No active filters</div>
+    </section>
+
+    <section class="filter-list" id="filter-list" aria-label="Configured filters">
+      <div class="empty-state">Configure fields to start filtering this table.</div>
+    </section>
+
+    <footer class="help-text">
+      <p>This widget publishes matching source-table row IDs with <code>grist.setSelectedRows()</code>. Link other widgets with <strong>SELECT BY</strong> this widget. Native Grist filters stay local to each widget.</p>
+    </footer>
+  </main>
+
+  <template id="config-row-template">
+    <div class="config-row">
+      <label>
+        Field
+        <select data-role="field"></select>
+      </label>
+      <label>
+        Label
+        <input data-role="label" type="text" placeholder="Human label">
+      </label>
+      <label>
+        Type
+        <select data-role="type">
+          <option value="text">Text contains</option>
+          <option value="singleSelect">Single select</option>
+          <option value="multiSelect">Multi select</option>
+          <option value="boolean">Boolean</option>
+          <option value="numberRange">Number range</option>
+          <option value="dateRange">Date range</option>
+        </select>
+      </label>
+      <label>
+        Default
+        <input data-role="default" type="text" placeholder="Optional">
+      </label>
+      <button data-role="remove" type="button" class="danger">Remove</button>
+    </div>
+  </template>
+
+  <script type="module" src="app.js?v=20260613"></script>
+</body>
+</html>
