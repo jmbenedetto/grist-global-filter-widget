@@ -2,6 +2,8 @@
 
 Static Grist custom widget that acts as a shared filter controller for one selected source table. It reads the selected table, evaluates configured faceted filters, and publishes matching row IDs with `grist.setSelectedRows(...)` so other Grist widgets can follow it through `SELECT BY`.
 
+The runtime UI is intentionally compact: a horizontal filter bar designed to occupy a small Grist widget footprint so the rest of the page remains available for analysis widgets.
+
 ## Hosted URL
 
 After GitHub Pages is enabled for the repository root on the default branch, the widget entry point is:
@@ -37,6 +39,13 @@ After GitHub Pages is enabled for the repository root on the default branch, the
    - Publish no rows.
 9. Save configuration.
 10. Configure target Grist widgets with `SELECT BY` the global filter widget.
+
+## Layout behavior
+
+- Runtime controls render as one horizontal bar with row count, inline filters, active chips, clear action, and configuration button.
+- The filter strip scrolls horizontally when configured filters exceed the available width.
+- The configuration panel opens only when the user clicks the gear button.
+- Help/documentation text is kept in this README instead of occupying dashboard screen real estate.
 
 ## Filtering behavior
 

@@ -115,7 +115,7 @@ function renderFilterControls() {
     const wrapper = document.createElement('article');
     wrapper.className = 'filter-card';
     wrapper.dataset.field = filter.field;
-    wrapper.innerHTML = `<div class="filter-card-header"><h3>${escapeHtml(filter.label)}</h3><button class="link-button" type="button">Clear</button></div>`;
+    wrapper.innerHTML = `<div class="filter-card-header"><h3>${escapeHtml(filter.label)}</h3><button class="link-button" type="button" title="Clear ${escapeHtml(filter.label)}">×</button></div>`;
     const body = document.createElement('div');
     body.className = 'filter-control';
     body.appendChild(buildControl(filter));
@@ -134,6 +134,7 @@ function buildControl(filter) {
   if (filter.type === 'singleSelect' || filter.type === 'multiSelect') {
     const select = document.createElement('select');
     select.multiple = filter.type === 'multiSelect';
+    if (select.multiple) select.size = 1;
     if (!select.multiple) select.appendChild(new Option('Any', ''));
     for (const option of uniqueFieldValues(state.records, filter.field)) {
       select.appendChild(new Option(option, option));
@@ -218,7 +219,7 @@ function renderActiveChips() {
 
 function publishPreview() {
   const matches = filterRecords(state.records, state.options, state.filters);
-  el.rowCount.textContent = `${matches.length} / ${state.records.length} rows`;
+  el.rowCount.textContent = `${matches.length} / ${state.records.length}`;
   const columnHint = state.columns.length ? `Ready (${state.columns.join(', ')})` : 'Ready (id only)';
   setStatus(state.options.filters.length ? columnHint : 'Not configured', state.options.filters.length ? 'ok' : 'warn');
 }
@@ -231,7 +232,7 @@ function schedulePublish() {
 async function publishSelection() {
   const matches = filterRecords(state.records, state.options, state.filters);
   const rowIds = matches.map((record) => record.id).filter((id) => id !== undefined && id !== null);
-  el.rowCount.textContent = `${matches.length} / ${state.records.length} rows`;
+  el.rowCount.textContent = `${matches.length} / ${state.records.length}`;
   await grist.setSelectedRows(rowIds).catch((error) => setStatus(`Publish failed: ${error.message}`, 'error'));
 }
 
