@@ -207,7 +207,8 @@ function renderActiveChips() {
 function publishPreview() {
   const matches = filterRecords(state.records, state.options, state.filters);
   el.rowCount.textContent = `${matches.length} / ${state.records.length} rows`;
-  setStatus(state.options.filters.length ? 'Ready' : 'Not configured', state.options.filters.length ? 'ok' : 'warn');
+  const columnHint = state.columns.length ? `Ready (${state.columns.join(', ')})` : 'Ready (id only)';
+  setStatus(state.options.filters.length ? columnHint : 'Not configured', state.options.filters.length ? 'ok' : 'warn');
 }
 
 function schedulePublish() {
