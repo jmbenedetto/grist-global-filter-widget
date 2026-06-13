@@ -60,3 +60,12 @@ test('widget layout reacts to available width', () => {
   assert.match(stylesCss, /data-layout="medium"/);
   assert.match(stylesCss, /data-layout="wide"/);
 });
+
+test('medium-width layout keeps filter controls inside the iframe bounds', () => {
+  assert.match(stylesCss, /\.app-shell\s*\{[^}]*overflow-x:\s*clip/s);
+  assert.match(stylesCss, /\.filter-bar\s*\{[^}]*max-width:\s*100%/s);
+  assert.match(stylesCss, /\.filter-bar\s*\{[^}]*overflow:\s*hidden/s);
+  assert.doesNotMatch(stylesCss, /data-layout="medium"[^{}]*\.popover[\s\S]*?position:\s*absolute/);
+  assert.match(stylesCss, /\.range-fields\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
+  assert.match(stylesCss, /\.range-fields input\s*\{[^}]*min-width:\s*0/s);
+});

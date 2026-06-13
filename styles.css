@@ -52,7 +52,10 @@ input::placeholder {
 .app-shell {
   position: relative;
   container-type: inline-size;
-  padding: 0.22rem;
+  width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+  padding: 0.22rem 0.38rem 0.22rem 0.22rem;
 }
 
 .filter-bar {
@@ -60,9 +63,13 @@ input::placeholder {
   flex-wrap: wrap;
   align-content: start;
   gap: 0.24rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   min-height: 34px;
   max-height: none;
   padding: 0.25rem;
+  overflow: hidden;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -143,7 +150,8 @@ input::placeholder {
   width: 100%;
   max-width: 100%;
   max-height: 70vh;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   border: 1px solid var(--line-strong);
   border-radius: 9px;
   background: var(--panel);
@@ -212,8 +220,12 @@ input::placeholder {
 
 .range-fields {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.35rem;
+}
+
+.range-fields input {
+  min-width: 0;
 }
 
 .editor-actions {
@@ -287,7 +299,6 @@ input::placeholder {
   min-width: 8rem;
 }
 
-.app-shell[data-layout="medium"] .popover,
 .app-shell[data-layout="wide"] .popover {
   position: absolute;
   top: calc(100% + 0.22rem);
@@ -295,6 +306,10 @@ input::placeholder {
   width: auto;
   min-width: 14rem;
   max-width: min(30rem, calc(100vw - 1rem));
+}
+
+.app-shell[data-layout="wide"] .range-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 @container (min-width: 300px) {
@@ -318,6 +333,14 @@ input::placeholder {
     min-width: 8rem;
   }
 
+}
+
+@container (min-width: 520px) {
+  .add-filter-placeholder {
+    flex: 1 1 10rem;
+    width: auto;
+  }
+
   .popover {
     position: absolute;
     top: calc(100% + 0.22rem);
@@ -326,11 +349,8 @@ input::placeholder {
     min-width: 14rem;
     max-width: min(30rem, calc(100vw - 1rem));
   }
-}
 
-@container (min-width: 520px) {
-  .add-filter-placeholder {
-    flex: 1 1 10rem;
-    width: auto;
+  .range-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
