@@ -38,7 +38,19 @@ window.addEventListener('error', (event) => setStatus(`Error: ${event.message}`,
 
 // Read-table access lets the widget inspect the selected source table. allowSelectBy
 // advertises that this custom widget can be used as a SELECT BY source by other widgets.
-grist.ready({ requiredAccess: 'read table', allowSelectBy: true });
+// Optional columns tell Grist to send mapped field values instead of id-only rows.
+grist.ready({
+  requiredAccess: 'read table',
+  allowSelectBy: true,
+  columns: [
+    { name: 'category', title: 'Category', type: 'Text', optional: true },
+    { name: 'region', title: 'Region', type: 'Text', optional: true },
+    { name: 'active', title: 'Active', type: 'Bool', optional: true },
+    { name: 'priority_text', title: 'Priority Text', type: 'Text', optional: true },
+    { name: 'stock_cover_days', title: 'Stock Cover Days', type: 'Numeric', optional: true },
+    { name: 'next_review_date', title: 'Next Review Date', type: 'Date', optional: true },
+  ],
+});
 
 await loadOptions();
 bindChrome();
