@@ -84,7 +84,7 @@ export function filterRecords(records, options, state) {
 }
 
 export function recordMatchesFilter(record, filter, activeValue) {
-  const rawValue = record?.[filter.field];
+  const rawValue = getRecordValue(record, filter.field);
 
   switch (filter.type) {
     case 'singleSelect':
@@ -109,10 +109,22 @@ export function recordMatchesFilter(record, filter, activeValue) {
 export function uniqueFieldValues(records, field) {
   const values = new Set();
   records.forEach((record) => {
-    const value = record?.[field];
+    const value = getRecordValue(record, field);
     if (value !== undefined && value !== null && value !== '') values.add(String(value));
   });
   return [...values].sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+}
+
+export function getRecordValue(record, field) {
+  if (!record || !field) return undefined;
+  if (Object.prototype.hasOwnProperty.call(record, field)) return record[field];
+  const wanted = normalizeFieldName(field);
+  const matchingKey = Object.keys(record).find((key) => normalizeFieldName(key) === wanted);
+  return matchingKey ? record[matchingKey] : undefined;
+}
+
+function normalizeFieldName(field) {
+  return String(field || '').toLocaleLowerCase().replace(/[^a-z0-9]+/g, '');
 }
 
 export function summarizeValue(value, type) {

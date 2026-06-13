@@ -57,3 +57,18 @@ test('date range checks ISO-like date bounds', () => {
 test('uniqueFieldValues returns sorted nonblank strings', () => {
   assert.deepEqual(uniqueFieldValues(records, 'category'), ['A', 'B']);
 });
+
+test('field lookup accepts Grist label-style names for configured id-style fields', () => {
+  const labelRows = [
+    { id: 1, Category: 'Diagnostic', 'Stock Cover Days': 5 },
+    { id: 2, Category: 'Health Kit', 'Stock Cover Days': 25 },
+  ];
+  const options = normalizeOptions({
+    filters: [
+      { field: 'category', type: 'singleSelect' },
+      { field: 'stock_cover_days', type: 'numberRange' },
+    ],
+  });
+  assert.deepEqual(uniqueFieldValues(labelRows, 'category'), ['Diagnostic', 'Health Kit']);
+  assert.deepEqual(filterRecords(labelRows, options, { category: 'Diagnostic', stock_cover_days: { min: '1', max: '10' } }).map((row) => row.id), [1]);
+});
