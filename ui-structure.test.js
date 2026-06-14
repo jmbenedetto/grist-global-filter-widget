@@ -32,7 +32,8 @@ test('vertical option B stacks tight tags and expands downward inside narrow wid
 });
 
 test('widget uses standard Grist visible-column configuration instead of custom mapping dropdowns', () => {
-  assert.match(appJs, /grist\.ready\(\{\s*requiredAccess:\s*'read table',\s*allowSelectBy:\s*true,\s*\}\)/s);
+  assert.match(appJs, /requiredAccess:\s*'full'/);
+  assert.match(appJs, /allowSelectBy:\s*true/);
   assert.doesNotMatch(appJs, /columns:\s*\[/);
   assert.match(appJs, /includeColumns:\s*'shown'/);
 });

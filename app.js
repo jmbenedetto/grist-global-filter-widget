@@ -47,7 +47,10 @@ document.addEventListener('click', (event) => {
 // columns are shown/mapped there; this widget turns those shown fields into
 // available filter attributes. The widget itself has no custom config panel.
 grist.ready({
-  requiredAccess: 'read table',
+  // Full access is required to read Grist metadata tables such as
+  // _grist_Tables_column. The widget needs that metadata to render Date fields
+  // as date-range controls instead of inferring from numeric date values.
+  requiredAccess: 'full',
   allowSelectBy: true,
 });
 

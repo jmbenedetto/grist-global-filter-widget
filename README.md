@@ -23,7 +23,7 @@ After GitHub Pages is enabled for the repository root on the default branch, the
 
 1. Add a Custom Widget to a Grist page.
 2. Set the Custom URL to the hosted widget URL.
-3. Set access to `Read table`.
+3. Set access to `Full document access`. The widget reads Grist metadata tables to classify `Date`/`DateTime` fields correctly; row filtering still only publishes selected row IDs for linked widgets.
 4. Select the source table that should drive shared filtering.
 5. Use Grist's standard widget sidebar visible-column checkboxes to mark the source-table fields that should be available as filters.
 6. Configure target Grist widgets with `SELECT BY` the global filter widget.
@@ -53,7 +53,7 @@ This custom widget is a shared filter controller: linked widgets respond to the 
 
 ## Field configuration
 
-Only fields marked visible in Grist's standard widget sidebar are exposed in the user-facing filter controls. Fields removed from the visible-column configuration are not displayed. The widget prefers Grist typed cell metadata when available, so Grist `Date` and `DateTime` columns use date range inputs even though Grist transmits date cells as numeric timestamps. When metadata is unavailable, the widget falls back to value inference for categorical checklists, boolean choices, text contains inputs, numeric ranges, and date ranges.
+Only fields marked visible in Grist's standard widget sidebar are exposed in the user-facing filter controls. Fields removed from the visible-column configuration are not displayed. The widget reads Grist's `_grist_Tables_column` metadata when full document access is granted, so Grist `Date` and `DateTime` columns use date range inputs even when displayed values look numeric. When metadata is unavailable, the widget falls back to typed cell metadata and value inference for categorical checklists, boolean choices, text contains inputs, numeric ranges, and date ranges.
 
 ## Validation plan
 
