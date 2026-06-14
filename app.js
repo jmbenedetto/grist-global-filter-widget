@@ -58,8 +58,11 @@ render();
 grist.onRecords(async (records) => {
   const resolved = await resolveRecords(records);
   state.records = resolved.rows;
-  state.fieldTypes = resolved.fieldTypes;
   state.fields = inferColumns(state.records);
+  state.fieldTypes = {
+    ...resolved.fieldTypes,
+    ...(await fetchFieldTypesFromDocMetadata(state.fields)),
+  };
   const previousFilters = state.filters;
   state.options = normalizeOptions({
     version: 1,
@@ -391,6 +394,32 @@ async function fetchRowsFromDocApi(tableId) {
   }
 }
 
+async function fetchFieldTypesFromDocMetadata(fields) {
+  const docApi = window.grist?.docApi || window.grist?.raw?.docApi || null;
+  if (!docApi?.fetchTable || !fields.length) return {};
+  try {
+    const columnMetadata = rowsFromTablePayload(await docApi.fetchTable('_grist_Tables_column')).rows;
+    return fieldTypesFromColumnMetadata(columnMetadata, fields);
+  } catch (error) {
+    console.warn('metadata fetch failed', error);
+    return {};
+  }
+}
+
+function fieldTypesFromColumnMetadata(columnMetadata, fields) {
+  const wanted = new Map(fields.map((field) => [normalizeFieldName(field), field]));
+  const fieldTypes = {};
+  for (const column of columnMetadata) {
+    const type = column.type;
+    if (!type) continue;
+    for (const key of [column.colId, column.label]) {
+      const field = wanted.get(normalizeFieldName(key));
+      if (field && !fieldTypes[field]) fieldTypes[field] = type;
+    }
+  }
+  return fieldTypes;
+}
+
 function emptyRows() {
   return { rows: [], fieldTypes: {} };
 }
@@ -463,6 +492,10 @@ function inferColumns(records) {
     if (key !== 'id') fields.add(key);
   }));
   return [...fields].sort();
+}
+
+function normalizeFieldName(field) {
+  return String(field || '').toLocaleLowerCase().replace(/[^a-z0-9]+/g, '');
 }
 
 function escapeHtml(value) {

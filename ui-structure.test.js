@@ -37,12 +37,15 @@ test('widget uses standard Grist visible-column configuration instead of custom 
   assert.match(appJs, /includeColumns:\s*'shown'/);
 });
 
-test('widget prefers Grist typed cell metadata for date range editors', () => {
+test('widget prefers Grist metadata for date range editors', () => {
   assert.match(appJs, /cellFormat:\s*'typed'/);
   assert.match(appJs, /tag === 'd'/);
   assert.match(appJs, /fieldTypes\[field\] \|\|= 'Date'/);
   assert.match(appJs, /tag === 'D'/);
   assert.match(appJs, /fieldTypes\[field\] \|\|= extra \? `DateTime:\$\{extra\}` : 'DateTime'/);
+  assert.match(appJs, /docApi\.fetchTable\('_grist_Tables_column'\)/);
+  assert.match(appJs, /fieldTypesFromColumnMetadata/);
+  assert.match(appJs, /column\.colId, column\.label/);
   assert.match(appJs, /isDateRange \? 'date' : 'number'/);
 });
 
