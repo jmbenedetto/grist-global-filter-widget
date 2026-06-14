@@ -16,6 +16,7 @@
   --danger: var(--grist-theme-text-danger, var(--grist-theme-error, #b42318));
   --danger-bg: var(--grist-theme-toast-error-bg, var(--grist-theme-error-light, #fee4e2));
   --shadow: var(--grist-theme-popup-shadow-outer, 0 10px 24px rgba(16, 24, 40, 0.16));
+  --grist-narrow-rail-cap: 180px;
   font-family: var(--grist-theme-font-family, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
 }
 
@@ -138,12 +139,17 @@ input::placeholder {
   width: 100%;
   min-width: 0;
   min-height: 1.65rem;
+  height: auto;
   border: 1px dashed var(--line-strong);
   border-radius: 999px;
   color: var(--muted);
   padding: 0.16rem 0.5rem;
+  overflow: visible;
+  overflow-wrap: anywhere;
   font-size: 0.72rem;
   text-align: left;
+  text-overflow: clip;
+  white-space: normal;
   line-height: 1.05;
 }
 
@@ -347,13 +353,15 @@ input::placeholder {
 }
 
 /*
- * Ultra-narrow Grist sections can be about 135px wide. Fit the actual iframe
- * width instead of pinning the rail to a larger fixed pixel width.
+ * Grist can leave the iframe at the browser default width (about 300px) while
+ * the visible custom-widget section is narrower. The iframe document cannot
+ * observe that parent-side clipping, so cap the narrow rail inside the iframe
+ * while still fitting true sub-180px iframe widths.
  */
 @media (max-width: 320px) {
   .app-shell {
-    width: 100%;
-    max-width: 100%;
+    width: min(100%, var(--grist-narrow-rail-cap));
+    max-width: min(100%, var(--grist-narrow-rail-cap));
     padding: 0.12rem;
   }
 
@@ -387,7 +395,8 @@ input::placeholder {
 }
 
 @media (max-width: 180px) {
-  .filter-chip {
+  .filter-chip,
+  .add-filter-placeholder {
     border-radius: 14px;
   }
 

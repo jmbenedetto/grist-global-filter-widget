@@ -72,11 +72,12 @@ test('layout keeps filter controls inside iframe bounds', () => {
   assert.match(stylesCss, /\.range-fields input\s*\{[^}]*min-width:\s*0/s);
 });
 
-test('ultra-narrow Grist iframe uses actual iframe width and stacks actions', () => {
+test('ultra-narrow Grist iframe caps the rail while still fitting true narrow iframes', () => {
+  assert.match(stylesCss, /--grist-narrow-rail-cap:\s*180px/);
   assert.match(stylesCss, /@media\s*\(max-width:\s*320px\)/);
-  assert.match(stylesCss, /\.app-shell\s*\{[^}]*width:\s*100%/s);
-  assert.match(stylesCss, /\.app-shell\s*\{[^}]*max-width:\s*100%/s);
-  assert.doesNotMatch(stylesCss, /\.app-shell\s*\{[^}]*\n\s*width:\s*180px/s);
+  assert.match(stylesCss, /\.app-shell\s*\{[^}]*width:\s*min\(100%,\s*var\(--grist-narrow-rail-cap\)\)/s);
+  assert.match(stylesCss, /\.app-shell\s*\{[^}]*max-width:\s*min\(100%,\s*var\(--grist-narrow-rail-cap\)\)/s);
+  assert.doesNotMatch(stylesCss, /\.app-shell\s*\{[^}]*width:\s*100%;\s*\n\s*max-width:\s*100%;/s);
   assert.match(stylesCss, /\.editor-actions\s*\{[^}]*flex-direction:\s*column/s);
   assert.match(stylesCss, /\.editor-action\s*\{[^}]*width:\s*100%/s);
 });
@@ -87,4 +88,12 @@ test('long filter chip text wraps and grows the pill height instead of clipping'
   assert.match(stylesCss, /\.filter-chip-label\s*\{[^}]*overflow-wrap:\s*anywhere/s);
   assert.match(stylesCss, /\.filter-chip-label\s*\{[^}]*overflow:\s*visible/s);
   assert.match(stylesCss, /\.filter-chip-remove\s*\{[^}]*flex:\s*0 0 auto/s);
+});
+
+test('add-filter placeholder wraps and grows instead of clipping in ultra-narrow widgets', () => {
+  assert.match(stylesCss, /\.add-filter-placeholder\s*\{[^}]*height:\s*auto/s);
+  assert.match(stylesCss, /\.add-filter-placeholder\s*\{[^}]*overflow-wrap:\s*anywhere/s);
+  assert.match(stylesCss, /\.add-filter-placeholder\s*\{[^}]*overflow:\s*visible/s);
+  assert.match(stylesCss, /\.add-filter-placeholder\s*\{[^}]*white-space:\s*normal/s);
+  assert.match(stylesCss, /\.filter-chip,\s*\n\s*\.add-filter-placeholder\s*\{[^}]*border-radius:\s*14px/s);
 });
