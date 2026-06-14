@@ -347,20 +347,20 @@ input::placeholder {
 }
 
 /*
- * Grist currently leaves the embedded iframe at the browser default width
- * (300px) even when the visible custom widget container is narrower. In that
- * case the parent clips the iframe. Keep the rendered rail below the observed
- * narrow Grist container width so controls remain visible.
+ * Ultra-narrow Grist sections can be about 135px wide. Fit the actual iframe
+ * width instead of pinning the rail to a larger fixed pixel width.
  */
 @media (max-width: 320px) {
   .app-shell {
-    width: 180px;
-    max-width: 180px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0.12rem;
   }
 
   .filter-bar.vertical {
     flex-direction: column;
     align-items: stretch;
+    padding: 0.2rem;
   }
 
   .chip-list.vertical {
@@ -368,8 +368,31 @@ input::placeholder {
   }
 
   .filter-chip,
-  .add-filter-placeholder {
+  .add-filter-placeholder,
+  .popover {
     width: 100%;
     max-width: 100%;
+  }
+
+  .editor-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .editor-action {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 180px) {
+  .filter-chip {
+    border-radius: 14px;
+  }
+
+  .popover-title {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
   }
 }

@@ -72,11 +72,13 @@ test('layout keeps filter controls inside iframe bounds', () => {
   assert.match(stylesCss, /\.range-fields input\s*\{[^}]*min-width:\s*0/s);
 });
 
-test('Grist default 300px iframe is capped below narrow parent clipping width', () => {
+test('ultra-narrow Grist iframe uses actual iframe width and stacks actions', () => {
   assert.match(stylesCss, /@media\s*\(max-width:\s*320px\)/);
-  assert.match(stylesCss, /\.app-shell\s*\{[^}]*width:\s*180px/s);
-  assert.match(stylesCss, /\.app-shell\s*\{[^}]*max-width:\s*180px/s);
-  assert.match(stylesCss, /iframe at the browser default width\s*\n \* \(300px\)/);
+  assert.match(stylesCss, /\.app-shell\s*\{[^}]*width:\s*100%/s);
+  assert.match(stylesCss, /\.app-shell\s*\{[^}]*max-width:\s*100%/s);
+  assert.doesNotMatch(stylesCss, /\.app-shell\s*\{[^}]*\n\s*width:\s*180px/s);
+  assert.match(stylesCss, /\.editor-actions\s*\{[^}]*flex-direction:\s*column/s);
+  assert.match(stylesCss, /\.editor-action\s*\{[^}]*width:\s*100%/s);
 });
 
 test('long filter chip text wraps and grows the pill height instead of clipping', () => {
