@@ -78,3 +78,11 @@ test('Grist default 300px iframe is capped below narrow parent clipping width', 
   assert.match(stylesCss, /\.app-shell\s*\{[^}]*max-width:\s*180px/s);
   assert.match(stylesCss, /iframe at the browser default width\s*\n \* \(300px\)/);
 });
+
+test('long filter chip text wraps and grows the pill height instead of clipping', () => {
+  assert.match(stylesCss, /\.filter-chip\s*\{[^}]*height:\s*auto/s);
+  assert.match(stylesCss, /\.filter-chip\s*\{[^}]*white-space:\s*normal/s);
+  assert.match(stylesCss, /\.filter-chip-label\s*\{[^}]*overflow-wrap:\s*anywhere/s);
+  assert.match(stylesCss, /\.filter-chip-label\s*\{[^}]*overflow:\s*visible/s);
+  assert.match(stylesCss, /\.filter-chip-remove\s*\{[^}]*flex:\s*0 0 auto/s);
+});

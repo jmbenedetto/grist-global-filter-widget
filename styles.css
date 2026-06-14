@@ -93,11 +93,12 @@ input::placeholder {
 
 .filter-chip {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.24rem;
   width: 100%;
   max-width: 100%;
   min-height: 1.45rem;
+  height: auto;
   border: 1px solid var(--chip-border);
   border-radius: 999px;
   background: var(--chip-bg);
@@ -105,8 +106,8 @@ input::placeholder {
   padding: 0.16rem 0.38rem;
   font-size: 0.72rem;
   font-weight: 750;
-  line-height: 1.05;
-  white-space: nowrap;
+  line-height: 1.12;
+  white-space: normal;
 }
 
 .filter-chip:hover,
@@ -116,11 +117,15 @@ input::placeholder {
 }
 
 .filter-chip-label {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  min-width: 0;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .filter-chip-remove {
+  flex: 0 0 auto;
   color: var(--chip-fg);
   font-size: 0.78rem;
   font-weight: 900;
