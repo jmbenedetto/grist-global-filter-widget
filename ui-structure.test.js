@@ -61,11 +61,13 @@ test('widget layout reacts to available width', () => {
   assert.match(stylesCss, /data-layout="wide"/);
 });
 
-test('medium-width layout keeps filter controls inside the iframe bounds', () => {
-  assert.match(stylesCss, /\.app-shell\s*\{[^}]*overflow-x:\s*clip/s);
+test('layout keeps filter controls inside iframe bounds', () => {
+  assert.match(stylesCss, /\.app-shell\s*\{[^}]*overflow-x:\s*hidden/s);
+  assert.match(stylesCss, /\.app-shell\s*\{[^}]*padding:\s*0\.22rem 0\.8rem 0\.22rem 0\.22rem/s);
+  assert.match(stylesCss, /\.filter-bar\s*\{[^}]*width:\s*auto/s);
   assert.match(stylesCss, /\.filter-bar\s*\{[^}]*max-width:\s*100%/s);
   assert.match(stylesCss, /\.filter-bar\s*\{[^}]*overflow:\s*hidden/s);
-  assert.doesNotMatch(stylesCss, /data-layout="medium"[^{}]*\.popover[\s\S]*?position:\s*absolute/);
+  assert.doesNotMatch(stylesCss, /position:\s*absolute/);
   assert.match(stylesCss, /\.range-fields\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
   assert.match(stylesCss, /\.range-fields input\s*\{[^}]*min-width:\s*0/s);
 });

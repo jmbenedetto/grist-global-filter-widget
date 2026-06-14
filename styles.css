@@ -54,8 +54,8 @@ input::placeholder {
   container-type: inline-size;
   width: 100%;
   min-width: 0;
-  overflow-x: clip;
-  padding: 0.22rem 0.38rem 0.22rem 0.22rem;
+  overflow-x: hidden;
+  padding: 0.22rem 0.8rem 0.22rem 0.22rem;
 }
 
 .filter-bar {
@@ -63,7 +63,7 @@ input::placeholder {
   flex-wrap: wrap;
   align-content: start;
   gap: 0.24rem;
-  width: 100%;
+  width: auto;
   max-width: 100%;
   min-width: 0;
   min-height: 34px;
@@ -300,16 +300,9 @@ input::placeholder {
 }
 
 .app-shell[data-layout="wide"] .popover {
-  position: absolute;
-  top: calc(100% + 0.22rem);
-  left: 0.35rem;
-  width: auto;
-  min-width: 14rem;
-  max-width: min(30rem, calc(100vw - 1rem));
-}
-
-.app-shell[data-layout="wide"] .range-fields {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 @container (min-width: 300px) {
@@ -342,15 +335,8 @@ input::placeholder {
   }
 
   .popover {
-    position: absolute;
-    top: calc(100% + 0.22rem);
-    left: 0.35rem;
-    width: auto;
-    min-width: 14rem;
-    max-width: min(30rem, calc(100vw - 1rem));
-  }
-
-  .range-fields {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
 }
