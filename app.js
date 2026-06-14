@@ -272,8 +272,11 @@ function buildRangeEditor(filter) {
   const value = state.filters[filter.field] || { min: '', max: '' };
   const group = document.createElement('div');
   group.className = 'range-fields';
-  const inputType = filter.type === 'dateRange' ? 'date' : 'number';
-  group.innerHTML = `<input type="${inputType}" data-role="min" placeholder="Min" value="${escapeHtml(value.min || '')}"><input type="${inputType}" data-role="max" placeholder="Max" value="${escapeHtml(value.max || '')}">`;
+  const isDateRange = filter.type === 'dateRange';
+  const inputType = isDateRange ? 'date' : 'number';
+  const minLabel = isDateRange ? 'Start date' : 'Min';
+  const maxLabel = isDateRange ? 'End date' : 'Max';
+  group.innerHTML = `<input type="${inputType}" data-role="min" placeholder="${minLabel}" aria-label="${minLabel}" value="${escapeHtml(value.min || '')}"><input type="${inputType}" data-role="max" placeholder="${maxLabel}" aria-label="${maxLabel}" value="${escapeHtml(value.max || '')}">`;
   group.addEventListener('input', () => {
     state.filters[filter.field] = {
       min: group.querySelector('[data-role="min"]').value,

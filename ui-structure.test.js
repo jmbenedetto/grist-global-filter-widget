@@ -43,7 +43,14 @@ test('widget prefers Grist typed cell metadata for date range editors', () => {
   assert.match(appJs, /fieldTypes\[field\] \|\|= 'Date'/);
   assert.match(appJs, /tag === 'D'/);
   assert.match(appJs, /fieldTypes\[field\] \|\|= extra \? `DateTime:\$\{extra\}` : 'DateTime'/);
-  assert.match(appJs, /filter\.type === 'dateRange' \? 'date' : 'number'/);
+  assert.match(appJs, /isDateRange \? 'date' : 'number'/);
+});
+
+test('date range editor labels use start and end date wording', () => {
+  assert.match(appJs, /const minLabel = isDateRange \? 'Start date' : 'Min'/);
+  assert.match(appJs, /const maxLabel = isDateRange \? 'End date' : 'Max'/);
+  assert.match(appJs, /aria-label="\$\{minLabel\}"/);
+  assert.match(appJs, /aria-label="\$\{maxLabel\}"/);
 });
 
 test('value editor keeps checkbox size independent from text visibility', () => {
