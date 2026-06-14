@@ -57,15 +57,26 @@ export function buildInitialState(options) {
   return Object.fromEntries(options.filters.map((filter) => [filter.field, structuredCloneSafe(filter.defaultValue)]));
 }
 
-export function deriveFilterDefinitions(records, fields) {
+export function deriveFilterDefinitions(records, fields, fieldTypes = {}) {
   return fields
     .filter((field) => field && field !== 'id')
     .map((field) => ({
       field,
       label: labelFromField(field),
-      type: inferFilterType(records, field),
+      type: typeFromMetadata(fieldTypes[field]) || inferFilterType(records, field),
       defaultValue: null,
     }));
+}
+
+function typeFromMetadata(rawType) {
+  const type = String(rawType || '').split(':')[0].trim();
+  if (type === 'Date' || type === 'DateTime' || type === 'dateRange') return 'dateRange';
+  if (type === 'Int' || type === 'Numeric' || type === 'numberRange') return 'numberRange';
+  if (type === 'Bool' || type === 'boolean') return 'boolean';
+  if (type === 'ChoiceList' || type === 'RefList' || type === 'multiSelect') return 'multiSelect';
+  if (type === 'Choice' || type === 'Ref' || type === 'singleSelect') return 'singleSelect';
+  if (type === 'Text' || type === 'Any' || type === 'text') return 'text';
+  return null;
 }
 
 export function emptyValueForType(type) {

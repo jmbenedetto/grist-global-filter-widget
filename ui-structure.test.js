@@ -37,6 +37,15 @@ test('widget uses standard Grist visible-column configuration instead of custom 
   assert.match(appJs, /includeColumns:\s*'shown'/);
 });
 
+test('widget prefers Grist typed cell metadata for date range editors', () => {
+  assert.match(appJs, /cellFormat:\s*'typed'/);
+  assert.match(appJs, /tag === 'd'/);
+  assert.match(appJs, /fieldTypes\[field\] \|\|= 'Date'/);
+  assert.match(appJs, /tag === 'D'/);
+  assert.match(appJs, /fieldTypes\[field\] \|\|= extra \? `DateTime:\$\{extra\}` : 'DateTime'/);
+  assert.match(appJs, /filter\.type === 'dateRange' \? 'date' : 'number'/);
+});
+
 test('value editor keeps checkbox size independent from text visibility', () => {
   assert.match(stylesCss, /\.value-item input\s*\{[^}]*width:\s*0\.9rem/s);
   assert.doesNotMatch(stylesCss, /\.editor-fields input\s*\{/);

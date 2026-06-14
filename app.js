@@ -13,6 +13,7 @@ import {
 const state = {
   records: [],
   fields: [],
+  fieldTypes: {},
   options: DEFAULT_OPTIONS,
   filters: {},
   openFieldMenu: false,
@@ -55,13 +56,15 @@ bindResponsiveLayout();
 render();
 
 grist.onRecords(async (records) => {
-  state.records = await resolveRecords(records);
+  const resolved = await resolveRecords(records);
+  state.records = resolved.rows;
+  state.fieldTypes = resolved.fieldTypes;
   state.fields = inferColumns(state.records);
   const previousFilters = state.filters;
   state.options = normalizeOptions({
     version: 1,
     emptyBehavior: 'all',
-    filters: deriveFilterDefinitions(state.records, state.fields),
+    filters: deriveFilterDefinitions(state.records, state.fields, state.fieldTypes),
   });
   state.filters = Object.fromEntries(state.options.filters.map((filter) => [
     filter.field,
@@ -347,62 +350,108 @@ async function publishSelection() {
 }
 
 async function resolveRecords(records) {
-  const initialRows = rowsFromTablePayload(records);
-  const selectedRows = await fetchRowsFromSelectedTable();
-  if (selectedRows.length) return selectedRows;
-  if (initialRows.some((row) => Object.keys(row).some((key) => key !== 'id'))) return initialRows;
+  const initial = rowsFromTablePayload(records);
+  const selected = await fetchRowsFromSelectedTable();
+  if (selected.rows.length) return selected;
+  if (initial.rows.some((row) => Object.keys(row).some((key) => key !== 'id'))) return initial;
 
   const tableId = new URLSearchParams(window.location.search).get('tableId') || 'Fake_DRP_Filter_Source';
   const docRows = await fetchRowsFromDocApi(tableId);
-  return docRows.length ? docRows : initialRows;
+  return docRows.rows.length ? docRows : initial;
 }
 
 async function fetchRowsFromSelectedTable() {
-  if (!window.grist?.fetchSelectedTable) return [];
+  if (!window.grist?.fetchSelectedTable) return emptyRows();
+  try {
+    const typedPayload = await window.grist.fetchSelectedTable({ format: 'rows', includeColumns: 'shown', cellFormat: 'typed' });
+    const typedRows = rowsFromTablePayload(typedPayload);
+    if (typedRows.rows.length) return typedRows;
+  } catch (error) {
+    console.warn('fetchSelectedTable typed failed', error);
+  }
   try {
     return rowsFromTablePayload(await window.grist.fetchSelectedTable({ format: 'rows', includeColumns: 'shown' }));
   } catch (error) {
     console.warn('fetchSelectedTable failed', error);
-    return [];
+    return emptyRows();
   }
 }
 
 async function fetchRowsFromDocApi(tableId) {
   const docApi = window.grist?.docApi || window.grist?.raw?.docApi || null;
-  if (!docApi?.fetchTable || !tableId) return [];
+  if (!docApi?.fetchTable || !tableId) return emptyRows();
   try {
     return rowsFromTablePayload(await docApi.fetchTable(tableId));
   } catch (error) {
     console.warn('docApi.fetchTable failed', error);
-    return [];
+    return emptyRows();
   }
+}
+
+function emptyRows() {
+  return { rows: [], fieldTypes: {} };
 }
 
 function rowsFromTablePayload(payload) {
-  if (!payload) return [];
-  if (Array.isArray(payload)) return payload.map(normalizeRecord);
-  if (Array.isArray(payload.records)) return payload.records.map(normalizeRecord);
-  if (payload.tableData && typeof payload.tableData === 'object') return rowsFromColumnarTable(payload.tableData);
-  if (typeof payload === 'object') {
+  if (!payload) return emptyRows();
+  const fieldTypes = {};
+  let rows = [];
+  if (Array.isArray(payload)) rows = payload.map((record) => normalizeRecord(record, fieldTypes));
+  else if (Array.isArray(payload.records)) rows = payload.records.map((record) => normalizeRecord(record, fieldTypes));
+  else if (payload.tableData && typeof payload.tableData === 'object') rows = rowsFromColumnarTable(payload.tableData, fieldTypes);
+  else if (typeof payload === 'object') {
     const firstValue = Object.values(payload)[0];
-    if (Array.isArray(firstValue)) return rowsFromColumnarTable(payload);
+    if (Array.isArray(firstValue)) rows = rowsFromColumnarTable(payload, fieldTypes);
   }
-  return [];
+  return { rows, fieldTypes };
 }
 
-function normalizeRecord(record) {
-  return record?.fields ? { id: record.id, ...record.fields } : (record || {});
+function normalizeRecord(record, fieldTypes = {}) {
+  const row = record?.fields ? { id: record.id, ...record.fields } : (record || {});
+  return Object.fromEntries(Object.entries(row).map(([field, value]) => [field, normalizeCellValue(value, field, fieldTypes)]));
 }
 
-function rowsFromColumnarTable(tableData) {
+function rowsFromColumnarTable(tableData, fieldTypes = {}) {
   const columns = Object.keys(tableData || {});
   if (!columns.length) return [];
   const rowCount = Math.max(...columns.map((column) => Array.isArray(tableData[column]) ? tableData[column].length : 0));
   return Array.from({ length: rowCount }, (_, index) => {
     const row = {};
-    for (const column of columns) row[column] = tableData[column]?.[index];
+    for (const column of columns) row[column] = normalizeCellValue(tableData[column]?.[index], column, fieldTypes);
     return row;
   });
+}
+
+function normalizeCellValue(value, field, fieldTypes) {
+  if (!Array.isArray(value)) return value;
+  const [tag, payload, extra] = value;
+  if (tag === 'd') {
+    fieldTypes[field] ||= 'Date';
+    return timestampToDateInput(payload);
+  }
+  if (tag === 'D') {
+    fieldTypes[field] ||= extra ? `DateTime:${extra}` : 'DateTime';
+    return timestampToDateInput(payload);
+  }
+  if (tag === 'L') {
+    fieldTypes[field] ||= 'ChoiceList';
+    return value.slice(1).join(', ');
+  }
+  if (tag === 'R') {
+    fieldTypes[field] ||= `Ref:${payload}`;
+    return value[2];
+  }
+  if (tag === 'r') {
+    fieldTypes[field] ||= `RefList:${payload}`;
+    return Array.isArray(extra) ? extra.join(', ') : '';
+  }
+  return value;
+}
+
+function timestampToDateInput(timestamp) {
+  const numeric = Number(timestamp);
+  if (!Number.isFinite(numeric)) return '';
+  return new Date(numeric * 1000).toISOString().slice(0, 10);
 }
 
 function inferColumns(records) {

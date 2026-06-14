@@ -83,3 +83,22 @@ test('deriveFilterDefinitions uses shown Grist fields and infers compact filter 
     ['notes', 'text'],
   ]);
 });
+
+test('Grist column metadata takes precedence over value inference', () => {
+  const timestampRows = [
+    { id: 1, grist_date: 1781395200, qty: 1781395200, choice: 'North', flag: 1 },
+    { id: 2, grist_date: 1781481600, qty: 42, choice: 'South', flag: 0 },
+  ];
+  const definitions = deriveFilterDefinitions(timestampRows, ['grist_date', 'qty', 'choice', 'flag'], {
+    grist_date: 'Date',
+    qty: 'Numeric',
+    choice: 'Choice',
+    flag: 'Bool',
+  });
+  assert.deepEqual(definitions.map((filter) => [filter.field, filter.type]), [
+    ['grist_date', 'dateRange'],
+    ['qty', 'numberRange'],
+    ['choice', 'singleSelect'],
+    ['flag', 'boolean'],
+  ]);
+});

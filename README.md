@@ -53,7 +53,7 @@ This custom widget is a shared filter controller: linked widgets respond to the 
 
 ## Field configuration
 
-Only fields marked visible in Grist's standard widget sidebar are exposed in the user-facing filter controls. Fields removed from the visible-column configuration are not displayed. The widget infers compact editors from the shown field values: categorical checklists for low-cardinality text fields, boolean choices, text contains inputs, numeric ranges, and date ranges.
+Only fields marked visible in Grist's standard widget sidebar are exposed in the user-facing filter controls. Fields removed from the visible-column configuration are not displayed. The widget prefers Grist typed cell metadata when available, so Grist `Date` and `DateTime` columns use date range inputs even though Grist transmits date cells as numeric timestamps. When metadata is unavailable, the widget falls back to value inference for categorical checklists, boolean choices, text contains inputs, numeric ranges, and date ranges.
 
 ## Validation plan
 
