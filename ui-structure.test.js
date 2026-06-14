@@ -71,3 +71,10 @@ test('layout keeps filter controls inside iframe bounds', () => {
   assert.match(stylesCss, /\.range-fields\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
   assert.match(stylesCss, /\.range-fields input\s*\{[^}]*min-width:\s*0/s);
 });
+
+test('Grist default 300px iframe is capped below narrow parent clipping width', () => {
+  assert.match(stylesCss, /@media\s*\(max-width:\s*320px\)/);
+  assert.match(stylesCss, /\.app-shell\s*\{[^}]*width:\s*180px/s);
+  assert.match(stylesCss, /\.app-shell\s*\{[^}]*max-width:\s*180px/s);
+  assert.match(stylesCss, /iframe at the browser default width\s*\n \* \(300px\)/);
+});

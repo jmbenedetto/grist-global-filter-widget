@@ -340,3 +340,31 @@ input::placeholder {
     max-width: 100%;
   }
 }
+
+/*
+ * Grist currently leaves the embedded iframe at the browser default width
+ * (300px) even when the visible custom widget container is narrower. In that
+ * case the parent clips the iframe. Keep the rendered rail below the observed
+ * narrow Grist container width so controls remain visible.
+ */
+@media (max-width: 320px) {
+  .app-shell {
+    width: 180px;
+    max-width: 180px;
+  }
+
+  .filter-bar.vertical {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chip-list.vertical {
+    display: grid;
+  }
+
+  .filter-chip,
+  .add-filter-placeholder {
+    width: 100%;
+    max-width: 100%;
+  }
+}
